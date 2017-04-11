@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+		<style type="text/css">
+			#map {
+				width: 800px;
+				height: 600px;
+				margin: 0 auto;
+			}
+		</style>
+    </head>
+    <body>
+    	<div id="map"></div>
+
+
+		<script type="text/javascript" src="jquery.min.js"></script>
+    	<script type="text/javascript" src="echarts.min.js"></script>
+    	<script type="text/javascript" src="china.js"></script>
+
+    	<script type="text/javascript">
+    		var echart = echarts.init(document.getElementById('map'));
+    		var option = {
+    			tooltip: {
+//                  show: false //不显示提示标签
+                    formatter: '{b}', //提示标签格式
+                    backgroundColor:'#ff7f50',//提示标签背景颜色
+                    textStyle:{color:'#fff'} //提示标签字体颜色
+                },
+    			series: [{
+    				type: 'map',
+    				mapType: 'china',
+    				label: {
+    					normal: {
+    						show: true, //显示省份标签
+    						textStyle: {color: '#c71585'} //省份标签字体颜色
+    					},
+    					emphasis: { //对应的鼠标悬停效果
+    						show: true,
+    						textStyle: {color: '#800080'}
+    					}
+    				},
+    				itemStyle: {
+    					normal: {
+    						borderWidth: .5,//区域边框宽度
+    						borderColor: '#009fe8',//区域边框颜色
+    						areaColor: '#ffefd5'//区域颜色
+    					},
+    					emphasis: {
+    						borderWidth: .5,
+    						borderColor: '#4b0082',
+    						areaColor: '#ffdeae'
+    					}
+    				},
+    				data: [
+    					{name:'陕西', selected:true}
+    				]
+
+    			}],
+    		};
+
+    		echart.setOption(option);
+    		echart.on('mouseover', function (params) {
+    			var dataIndex = params.dataIndex;
+    			console.log(params);
+    		});
+    	</script>
+
+
+    </body>
+</html>
